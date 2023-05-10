@@ -12,39 +12,40 @@ export default function Forms(props) {
 
 
     function handleUpclick(){
-        console.log("clicked")
+        
         let newText= Text.toUpperCase();
         setText(newText)
-        props.handleAlert("success, " ,"Text Converted To Upper Case!" );
+        props.handleAlert("success" ,"Text Converted To Upper Case!" );
 
         
 
     }
 
     function handleLoclick(){
-        console.log("clicked")
+        
         let newText= Text.toLowerCase();
         setText(newText)
-        
+        props.handleAlert("success" ,"Text Converted To Lower Case!" );
 
     }
     function handleClearClick(){
-      console.log("clicked")
+      
       
       setText("")
-      
+      props.handleAlert("success" ,"Text Cleared!" );
 
   }
 
   function handleCapClick(){
     
     setText(Text.charAt(0).toUpperCase() + Text.slice(1))
-    
+    props.handleAlert("success " ,"First Letter Capitilized!" );
   }
 
   function handleRemClick(){
     
   setText(Text.replace(/\s+/g, ' ').trim()) 
+  props.handleAlert("success" ,"Removed Extra Spaces" );
   }
     
   
@@ -53,17 +54,16 @@ export default function Forms(props) {
 
     const handleOnchange = (event) =>{
         setText(event.target.value)
-       
+        
     }
 
 
     const handleCopy = () => {
-      console.log("I am copy");
-      var text = document.getElementById("myBox");
-      text.select();
-      navigator.clipboard.writeText(text.value);
+      
+
+      navigator.clipboard.writeText(Text);
       document.getSelection().removeAllRanges();
-  
+      props.handleAlert("success" ,"Text Copied" );
     }
 
   return (
@@ -94,11 +94,11 @@ export default function Forms(props) {
     Words Count
   </h4>
 <h6 className='text-center'>
-  {Text.split(" ").filter((element)=>{return element.length!==0}).length}
+  {Text.split(/\s+/).filter((element)=>{return element.length!==0}).length}
 </h6>
 
 <h4 className='text-center' >Minutes Read</h4>
-<h6 className='text-center mb-3' >{0.008*Text.split(" ").length}</h6>
+<h6 className='text-center mb-3' >{0.008*Text.split(" ").filter((element)=>{return element.length!==0}).length}</h6>
 
 
 
